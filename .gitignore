@@ -4,6 +4,8 @@ node_modules/
 # Next.js build output
 .next/
 
+cinelingo-api/dist/
+
 # Next.js environment variables (optional)
 .env.local
 .env.development.local
