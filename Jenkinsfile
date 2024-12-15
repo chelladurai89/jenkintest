@@ -1,20 +1,48 @@
 /* Requires the Docker Pipeline plugin */
 pipeline {
-     environment {
+    environment {
         GITHUB_CREDENTIALS = credentials('github-pat3') // Reference GitHub PAT
     }
 
-    agent { docker { image 'node:22.12.0-alpine3.21' } }
+    agent {
+        docker {
+            image 'node:22.12.0-alpine3.21'
+        }
+    }
+
     stages {
-         stage('Clone Repository') {
+        stage('Clone Repository') {
             steps {
-                // Clone private GitHub repository
+                script {
+                    echo 'Cloning the private GitHub repository...'
+                }
                 git credentialsId: 'github-pat3', url: 'https://github.com/chelladurai89/jenkintest.git'
             }
         }
-        stage('build') {
+        stage('Build') {
             steps {
+                script {
+                    echo 'Building the application...'
+                }
                 sh 'node --version'
+            }
+        }
+    }
+
+    post {
+        always {
+            script {
+                echo 'Pipeline execution completed.'
+            }
+        }
+        success {
+            script {
+                echo 'Pipeline succeeded!'
+            }
+        }
+        failure {
+            script {
+                echo 'Pipeline failed.'
             }
         }
     }
