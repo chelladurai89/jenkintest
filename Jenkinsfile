@@ -9,7 +9,7 @@ pipeline {
          stage('Clone Repository') {
             steps {
                 // Clone private GitHub repository
-                git credentialsId: 'github-pa2t', url: 'https://github.com/chelladurai89/jenkintest'
+                git credentialsId: 'github-pat2', url: 'https://github.com/chelladurai89/jenkintest'
             }
         }
         stage('build') {
